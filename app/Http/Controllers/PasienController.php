@@ -157,8 +157,41 @@ class PasienController extends Controller
         if ($pasien->count() == 1) {
             return view('pasien.detailpasien', compact('pasien'))->with('success', 'Data Siswa Terdaftar');
         } else {
-            return redirect('caripasien')->with('error', 'Data tidak Terdaftar');
+            return redirect()->route('tampilpasien')->with('error', 'Pasien tidak Terdaftar');
         }
+    }
+
+
+    public function hapuspenimbangan($id){
+        $user = Pasien::find($id);
+        $user->beratbadan = null;
+        $user->save();
+
+        return redirect()->route('penimbangan')->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function hapusimunisasi($id){
+        $user = Pasien::find($id);
+        $user->imunisasi = null;
+        $user->save();
+
+        return redirect()->route('imunisasi')->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function hapusstunting($id){
+        $user = Pasien::find($id);
+        $user->stunting = null;
+        $user->save();
+
+        return redirect()->route('imunisasi')->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function hapusobat($id){
+        $user = Pasien::find($id);
+        $user->obat = null;
+        $user->save();
+
+        return redirect()->route('obat')->with('success', 'Data Berhasil Dihapus');
     }
 
 

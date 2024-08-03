@@ -29,6 +29,7 @@
                                         <th>Imunisasi</th>
                                         <th>Stunting</th>
                                         <th>Obat / Vitamin</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -47,9 +48,19 @@
                                         <td>{{ $d->stunting == null ? 'Tidak Stunting' : $d->stunting }}</td>
                                         <td>{{ $d->obat == null ? '-' : $d->obat }}</td>
                                         <td>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $d->id }}">
-                                                    Input Obat / Vitamin
-                                                </button>
+                                            <form id="delete-form-{{ $d->id }}" action="{{ route('obat.hapusobat', $d->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('POST')
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $d->id }}">
+                                                Input
+                                            </button>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal2{{ $d->id }}">
+                                                Edit
+                                            </button>
+                                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus data?');" class="btn btn-primary">
+                                                Hapus
+                                            </button>
+                                            </form>
                                         </td>
                                     </tr>
 
@@ -58,6 +69,31 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="editModalLabel{{ $d->id }}">Input Obat / Vitamin</h5>
+                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{{ route('obat.updateobat', $d->id) }}" method="POST">
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        <label for="NameLengkap">Obat / Vitamin</label>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id="NameLengkap" name="obat" value="{{ $d->obat }}" placeholder="obat" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="editModal2{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel2{{ $d->id }}" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editModalLabel2{{ $d->id }}">Edit Obat / Vitamin</h5>
                                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>

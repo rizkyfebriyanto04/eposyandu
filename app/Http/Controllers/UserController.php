@@ -27,7 +27,7 @@ class UserController extends Controller
     {
 
         $pasien = $request->objectpasienfk === '--Pilih--' ? null : $request->objectpasienfk;
-
+        // return $pasien;
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,

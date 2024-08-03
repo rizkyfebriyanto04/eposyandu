@@ -30,6 +30,7 @@
                                         <th>Tanggal Lahir</th>
                                         <th>Penimbangan</th>
                                         <th>Imunisasi</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,9 +47,19 @@
                                         <td>{{ $d->beratbadan == null ? 'Belum Di Isi' : $d->beratbadan }}</td>
                                         <td>{{ $d->imunisasi == null ? 'Belum Di Isi' : $d->imunisasi }}</td>
                                         <td>
+                                            <form id="delete-form-{{ $d->id }}" action="{{ route('imunisasi.hapusimunisasi', $d->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('POST')
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $d->id }}">
-                                                Input Imunisasi
+                                                Input
                                             </button>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal2{{ $d->id }}">
+                                                Edit
+                                            </button>
+                                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus data?');" class="btn btn-primary">
+                                                Hapus
+                                            </button>
+                                            </form>
                                         </td>
                                     </tr>
 
@@ -57,6 +68,32 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="editModalLabel{{ $d->id }}">Input Imunisasi</h5>
+                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{{ route('imunisasi.updateimunisasi', $d->id) }}" method="POST">
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        <label for="NameLengkap">Imunisasi</label>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id="NameLengkap" name="imunisasi" value="{{ $d->imunisasi }}" placeholder="imunisasi" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="editModal2{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel2{{ $d->id }}" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editModalLabel2{{ $d->id }}">Edit Imunisasi</h5>
                                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>

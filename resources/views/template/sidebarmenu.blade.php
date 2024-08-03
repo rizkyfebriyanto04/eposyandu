@@ -8,7 +8,7 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        @if(auth()->user()->role === 'admin')
+        @if(auth()->check() && auth()->user()->role === 'admin')
         <li
             class="sidebar-item ">
             <a href="{{ route('registrasi') }}" class='sidebar-link'>
@@ -25,7 +25,7 @@
             </a>
             <ul class="submenu ">
                 <li class="submenu-item  ">
-                    <a href="{{ route('pasien') }}" class="submenu-link">Input Pasien</a>
+                    <a href="{{ route('pasien') }}" class="submenu-link">Pasien</a>
                 </li>
                 <li class="submenu-item  ">
                     <a href="{{ route('penimbangan') }}" class="submenu-link">Penimbangan</a>
@@ -42,7 +42,7 @@
             </ul>
         </li>
         @endif
-        @if(auth()->user()->role === 'pasien' || auth()->user()->role === 'admin')
+        @if(auth()->check() && (auth()->user()->role === 'pasien' || auth()->user()->role === 'admin'))
         <li
             class="sidebar-item ">
             <a href="{{ route('tampilpasien') }}" class='sidebar-link'>
@@ -58,7 +58,7 @@
             class="sidebar-item  has-sub">
             <a href="#" class='sidebar-link'>
                 <i class="bi bi-person-fill"></i>
-                <span>{{ Auth::user()->name }}</span>
+                <span>{{ auth()->check() ? auth()->user()->name : 'Guest' }}                </span>
             </a>
             <ul class="submenu ">
                 <li class="submenu-item  ">

@@ -38,16 +38,25 @@ Route::post('pasien/update/{id}', [PasienController::class, 'updatepasien'])->na
 
 Route::get('penimbangan', [PasienController::class, 'penimbangan'])->name('penimbangan');
 Route::post('penimbangan/update/{id}', [PasienController::class, 'updatepenimbangan'])->name('penimbangan.updatepenimbangan');
+Route::post('delete-penimbangan/{id}', [PasienController::class, 'hapuspenimbangan'])->name('penimbangan.hapuspenimbangan');
+
 
 Route::get('imunisasi', [PasienController::class, 'imunisasi'])->name('imunisasi');
 Route::post('imunisasi/update/{id}', [PasienController::class, 'updateimunisasi'])->name('imunisasi.updateimunisasi');
+Route::post('delete-imunisasi/{id}', [PasienController::class, 'hapusimunisasi'])->name('imunisasi.hapusimunisasi');
+
 
 Route::get('stunting', [PasienController::class, 'stunting'])->name('stunting');
 Route::post('stunting/update/{id}', [PasienController::class, 'updatestunting'])->name('stunting.updatestunting');
+Route::post('delete-stunting/{id}', [PasienController::class, 'hapusstunting'])->name('stunting.hapusstunting');
+
 
 Route::get('obat', [PasienController::class, 'obat'])->name('obat');
 Route::post('obat/update/{id}', [PasienController::class, 'updateobat'])->name('obat.updateobat');
+Route::post('delete-obat/{id}', [PasienController::class, 'hapusobat'])->name('obat.hapusobat');
+
 
 
 Route::get('tampilpasien', [PasienController::class, 'tampilpasien'])->name('tampilpasien');
 Route::post('cari/pasien', [PasienController::class, 'caripasien'])->name('pasien.caripasien');
+

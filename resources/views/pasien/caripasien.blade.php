@@ -8,9 +8,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Data Pasien</h4>
-                        @if (session('success'))
-                            <div class="alert alert-success" id="success-alert">
-                                {{ session('success') }}
+                        @if (session('error'))
+                            <div class="alert alert-danger" id="error-alert">
+                                {{ session('error') }}
                             </div>
                         @endif
                     </div>
@@ -29,4 +29,11 @@
         </div>
     </div>
 </section>
+<script>
+var alertBox = document.getElementById('error-alert');
+
+setTimeout(function() {
+    alertBox.style.display = 'none';
+}, 3000);
+</script>
 @endsection

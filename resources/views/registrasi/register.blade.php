@@ -129,33 +129,33 @@
                 </div>
                 <form action="{{ route('registrasi.updateregistrasi', $d->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="NameLengkap" name="name" value="{{ $d->name }}" required>
+                            <label for="name{{$d->id}}">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="name{{$d->id}}" name="name" value="{{ $d->name }}" required>
                         </div>
-                    </div>
-                    <div class="modal-body">
                         <div class="form-group">
-                            <label for="Email">Email</label>
-                            <input type="email" class="form-control" id="Email" name="namalengkap" value="{{ $d->email }}" required>
+                            <label for="email{{$d->id}}">Email</label>
+                            <input type="email" class="form-control" id="email{{$d->id}}" name="email" value="{{ $d->email }}" required>
                         </div>
-                    </div>
-                    <div class="modal-body">
                         <div class="form-group">
-                            <label for="Email">Role</label>
-                            {{-- <input type="email" class="form-control" id="Email" name="role" value="{{ $d->role }}" required> --}}
+                            <label for="password{{$d->id}}">Password</label>
+                            <input type="password" class="form-control" id="password{{$d->id}}" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="pasienid{{$d->id}}">Pasien</label>
                             <fieldset class="form-group">
-                                <select class="form-select" id="basicSelect" name="role">
-                                    <option value="" disabled>-- Pilih --</option>
-                                    <option value="siswa" {{ $d->role == 'siswa' ? 'selected' : '' }}>Siswa</option>
-                                    <option value="guru" {{ $d->role == 'guru' ? 'selected' : '' }}>Guru</option>
-                                    <option value="orangtua" {{ $d->role == 'orangtua' ? 'selected' : '' }}>Orangtua</option>
+                                <select class="choices form-select" id="pasienid{{ $d->id }}" name="objectpasienfk">
+                                    @foreach ($pasien as $p)
+                                        <option value="{{ $p->id }}" {{ $d->objectpasienfk == $p->id ? 'selected' : '' }}>
+                                            {{ $p->namapasien }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </fieldset>
                         </div>
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -164,6 +164,7 @@
             </div>
         </div>
     </div>
+
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
