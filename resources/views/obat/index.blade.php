@@ -78,7 +78,15 @@
                                                     <div class="modal-body">
                                                         <label for="NameLengkap">Obat / Vitamin</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id="NameLengkap" name="obat" value="{{ $d->obat }}" placeholder="obat" >
+                                                            {{-- <input type="text" class="form-control" id="NameLengkap" name="obat" value="{{ $d->obat }}" placeholder="obat" > --}}
+                                                            {{-- <div class="form-group"> --}}
+                                                                <select class="form-select" name="obat" >
+                                                                    <option value="Vitamin A">Vitamin A</option>
+                                                                    <option value="Vitamin D" selected>Vitamin D</option>
+                                                                    <option value="Zat Besi">Zat Besi</option>
+                                                                    <option value="Multivitamin">Multivitamin</option>
+                                                                </select>
+                                                            {{-- </div> --}}
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">

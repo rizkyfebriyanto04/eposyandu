@@ -138,7 +138,7 @@
                         </div>
                         <label for="Nik">NIK</label>
                         <div class="form-group">
-                            <input class="form-control" id="Nik" type="text" name="nik" placeholder="NIK" required/>
+                            <input class="form-control" id="Nik" type="number" name="nik" placeholder="NIK" required/>
                         </div>
                         <label for="role">Jenis Kelamin</label>
                         <fieldset class="form-group">
@@ -150,7 +150,7 @@
                         </fieldset>
                         <label for="ttl">Tanggal Lahir</label>
                         <div class="form-group">
-                            <input type="date" name="tanggalahir" class="form-control mb-3 flatpickr-no-config" placeholder="Select date..">
+                            <input type="date" name="tanggalahir" class="form-control mb-3" placeholder="Select date.." id="tanggalahir">
                         </div>
                         <label for="alamat">Alamat</label>
                         <div class="form-group">
@@ -182,15 +182,10 @@
             alertBox.style.display = 'none';
         }, 3000);
 
-        // document.addEventListener("DOMContentLoaded", function() {
-        //     document.getElementById("myForm").addEventListener("submit", function(event) {
-        //         var namalengkap = document.getElementById("NameLengkap").value;
-        //         if (namalengkap.trim() === "") {
-        //             alert("Nama Lengkap harus diisi!");
-        //             event.preventDefault();
-        //         }
-        //     });
-        // });
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0]; // Format tanggal sebagai yyyy-mm-dd
+            document.getElementById('tanggalahir').setAttribute('max', today);
+        });
     </script>
 
 @endsection

@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="{{ asset('dist/assets/extensions/choices.js/public/assets/styles/choices.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/assets/extensions/simple-datatables/style.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/assets/compiled/css/table-datatable.css') }}">
-
     {{-- <link rel="stylesheet" href="{{ 'dist/assets/compiled/css/app.css'}}"> --}}
     {{-- <link rel="stylesheet" href="{{ 'dist/assets/compiled/css/app-dark.css'}}">
     <link rel="stylesheet" href="{{ 'dist/assets/compiled/css/iconly.css'}}">

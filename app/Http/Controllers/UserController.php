@@ -63,10 +63,15 @@ class UserController extends Controller
     }
 
     public function hapusregistrasi($id){
-        $user = User::find($id);
-        $user->delete();
 
-        return redirect()->route('registrasi')->with('success', 'Data Berhasil Dihapus');
+        if($id == 1){
+            return redirect()->route('registrasi')->with('error', 'Admin Tidak bisa di Hapus');
+        }else{
+            $user = User::find($id);
+            $user->delete();
+            return redirect()->route('registrasi')->with('success', 'Data Berhasil Dihapus');
+        }
+
     }
 
     public function updateregistrasi(Request $request, $id)
@@ -79,7 +84,7 @@ class UserController extends Controller
         $guru = User::find($id);
         $guru->name = $request->name;
         $guru->email = $request->email;
-        $guru->role = $request->role;
+        // $guru->role = $request->role;
         $guru->password = Hash::make($request->password);
         $guru->objectpasienfk = $request->objectpasienfk;
         $guru->save();
