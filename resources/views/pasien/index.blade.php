@@ -28,6 +28,7 @@
                                         <th>Nama Pasien</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Tanggal Lahir</th>
+                                        <th>Umur</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,6 +42,7 @@
                                         <td>{{ $d->namapasien }}</td>
                                         <td>{{ $d->jeniskelamin }}</td>
                                         <td>{{ $d->tanggalahir }}</td>
+                                        <td>{{ $d->umur }}</td>
                                         <td>
                                             <form id="delete-form-{{ $d->id }}" action="{{ route('pasien.hapuspasien', $d->id) }}" method="POST" style="display: inline;">
                                                 @csrf
@@ -91,7 +93,7 @@
 
                                                         <label for="TanggalLahir">Tanggal Lahir</label>
                                                         <div class="form-group">
-                                                            <input type="date" name="tanggalahir" value="{{ $d->tanggalahir }}" class="form-control mb-3 flatpickr-no-config" placeholder="Select date.." required>
+                                                            <input type="date" name="tanggalahir" value="{{ $d->tanggalahir }}" class="form-control mb-3" placeholder="Select date.." id="tanggalahir2">
                                                         </div>
 
                                                         <label for="Alamat">Alamat</label>
@@ -185,6 +187,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             const today = new Date().toISOString().split('T')[0]; // Format tanggal sebagai yyyy-mm-dd
             document.getElementById('tanggalahir').setAttribute('max', today);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0]; // Format tanggal sebagai yyyy-mm-dd
+            document.getElementById('tanggalahir2').setAttribute('max', today);
         });
     </script>
 

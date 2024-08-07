@@ -14,7 +14,11 @@ class PasienController extends Controller
         $title = 'Pasien';
 
         $data = DB::table('pasien')
-                ->get();
+        ->select('id', 'namapasien', 'nik', 'jeniskelamin', 'tanggalahir', 'alamat', 'beratbadan','tinggibadan', 'stunting', 'imunisasi', 'obat',
+                 DB::raw('TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()) as tahun'),
+                 DB::raw('FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)) as bulan'),
+                 DB::raw('CONCAT(TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()), " tahun ", FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)), " bulan") as umur'))
+        ->get();
 
         return view('pasien.index',compact('title','data'));
     }
@@ -69,16 +73,121 @@ class PasienController extends Controller
         $title = 'Pasien';
 
         $data = DB::table('pasien')
-                ->get();
+        ->select('id', 'namapasien', 'nik', 'jeniskelamin', 'tanggalahir', 'alamat', 'beratbadan','tinggibadan', 'stunting', 'imunisasi', 'obat',
+                 DB::raw('TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()) as tahun'),
+                 DB::raw('FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)) as bulan'),
+                 DB::raw('CONCAT(TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()), " tahun ", FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)), " bulan") as umur'))
+        ->get();
 
         return view('penimbangan.index',compact('title','data'));
     }
 
     public function updatepenimbangan(Request $request, $id)
     {
-
         $pasien = Pasien::find($id);
-        $pasien->beratbadan = $request->beratbadan;
+
+        $beratBadan = $request->beratbadan;
+        $tinggiBadan = $request->tinggibadan;
+
+        $pasien->beratbadan = $beratBadan;
+        $pasien->tinggibadan = $tinggiBadan;
+        $pasien->save();
+
+        $tanggalahir = $pasien->tanggalahir;
+        $umurTahun = date_diff(date_create($tanggalahir), date_create('now'))->y;
+        $jenisKelamin = $pasien->jeniskelamin;
+
+        $stuntingStatus = '';
+        if ($umurTahun == 1) {
+            if ($jenisKelamin == 'laki-laki') {
+                if ($beratBadan >= 7 && $beratBadan <= 12 && $tinggiBadan >= 70 && $tinggiBadan <= 78) {
+                    $stuntingStatus = 'Anak/Bayi normal';
+                }else{
+                    $stuntingStatus = 'Anak/Bayi Terkena Stunting';
+                }
+            } elseif ($jenisKelamin == 'perempuan') {
+                if ($beratBadan >= 7 && $beratBadan <= 11 && $tinggiBadan >= 70 && $tinggiBadan <= 78) {
+                    $stuntingStatus = 'Anak/Bayi normal';
+                }else{
+                    $stuntingStatus = 'Anak/Bayi Terkena Stunting';
+                }
+            }
+        } elseif ($umurTahun == 2) {
+            if ($jenisKelamin == 'laki-laki') {
+                if ($beratBadan >= 9 && $beratBadan <= 15 && $tinggiBadan >= 80 && $tinggiBadan <= 92) {
+                    $stuntingStatus = 'Anak/Bayi normal';
+                }else{
+                    $stuntingStatus = 'Anak/Bayi Terkena Stunting';
+                }
+            } elseif ($jenisKelamin == 'perempuan') {
+                if ($beratBadan >= 9 && $beratBadan <= 14 && $tinggiBadan >= 80 && $tinggiBadan <= 92) {
+                    $stuntingStatus = 'Anak/Bayi normal';
+                }else{
+                    $stuntingStatus = 'Anak/Bayi Terkena Stunting';
+                }
+            }
+        } elseif ($umurTahun > 3) {
+            if ($jenisKelamin == 'laki-laki') {
+                if ($beratBadan >= 9 && $beratBadan <= 15 && $tinggiBadan >= 82 && $tinggiBadan <= 95) {
+                    $stuntingStatus = 'Anak/Bayi normal';
+                }else{
+                    $stuntingStatus = 'Anak/Bayi Terkena Stunting';
+                }
+            } elseif ($jenisKelamin == 'perempuan') {
+                if ($beratBadan >= 9 && $beratBadan <= 14 && $tinggiBadan >= 82 && $tinggiBadan <= 95) {
+                    $stuntingStatus = 'Anak/Bayi normal';
+                }else{
+                    $stuntingStatus = 'Anak/Bayi Terkena Stunting';
+                }
+            }
+        }
+        // if ($umurTahun == 1) {
+        //     if ($jenisKelamin == 'laki-laki') {
+        //         if ($tinggiBadan < 71.0) {
+        //             return 'etst';
+        //             $stuntingStatus = 'Bayi terkena stunting';
+        //         } elseif ($tinggiBadan >= 71.0 && $tinggiBadan <= 78.1 && $beratBadan >= 7.7 && $beratBadan <= 10.8) {
+        //             return 'etstasdas';
+        //             $stuntingStatus = 'Bayi normal';
+        //         }
+        //     } elseif ($jenisKelamin == 'perempuan') {
+        //         if ($tinggiBadan < 68.9) {
+        //             $stuntingStatus = 'Bayi terkena stunting';
+        //         } elseif ($tinggiBadan >= 68.9 && $tinggiBadan <= 76.6 && $beratBadan >= 7.0 && $beratBadan <= 10.1) {
+        //             $stuntingStatus = 'Bayi normal';
+        //         }
+        //     }
+        // } elseif ($umurTahun == 2) {
+        //     if ($jenisKelamin == 'laki-laki') {
+        //         if ($tinggiBadan < 81.7) {
+        //             $stuntingStatus = 'Anak terkena stunting';
+        //         } elseif ($tinggiBadan >= 81.7 && $tinggiBadan <= 90.9 && $beratBadan >= 9.7 && $beratBadan <= 13.6) {
+        //             $stuntingStatus = 'Anak normal';
+        //         }
+        //     } elseif ($jenisKelamin == 'perempuan') {
+        //         if ($tinggiBadan < 80.0) {
+        //             $stuntingStatus = 'Anak terkena stunting';
+        //         } elseif ($tinggiBadan >= 80.0 && $tinggiBadan <= 89.6 && $beratBadan >= 9.0 && $beratBadan <= 13.0) {
+        //             $stuntingStatus = 'Anak normal';
+        //         }
+        //     }
+        // } elseif ($umurTahun == 3) {
+        //     if ($jenisKelamin == 'laki-laki') {
+        //         if ($tinggiBadan < 82.0) {
+        //             $stuntingStatus = 'Anak terkena stunting';
+        //         } elseif ($tinggiBadan >= 82.0 && $tinggiBadan <= 95.0 && $beratBadan >= 11.3 && $beratBadan <= 18.3) {
+        //             $stuntingStatus = 'Anak normal';
+        //         }
+        //     } elseif ($jenisKelamin == 'perempuan') {
+        //         if ($tinggiBadan < 82.0) {
+        //             $stuntingStatus = 'Anak terkena stunting';
+        //         } elseif ($tinggiBadan >= 82.0 && $tinggiBadan <= 95.0 && $beratBadan >= 10.8 && $beratBadan <= 18.1) {
+        //             $stuntingStatus = 'Anak normal';
+        //         }
+        //     }
+        // }
+
+        $pasien->stunting = $stuntingStatus;
         $pasien->save();
 
         return redirect()->route('penimbangan')->with('success', 'Data Berhasil Diubah');
@@ -88,7 +197,11 @@ class PasienController extends Controller
         $title = 'Pasien';
 
         $data = DB::table('pasien')
-                ->get();
+        ->select('id', 'namapasien', 'nik', 'jeniskelamin', 'tanggalahir', 'alamat', 'beratbadan','tinggibadan', 'stunting', 'imunisasi', 'obat',
+                 DB::raw('TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()) as tahun'),
+                 DB::raw('FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)) as bulan'),
+                 DB::raw('CONCAT(TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()), " tahun ", FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)), " bulan") as umur'))
+        ->get();
 
         return view('imunisasi.index',compact('title','data'));
     }
@@ -107,7 +220,11 @@ class PasienController extends Controller
         $title = 'Pasien';
 
         $data = DB::table('pasien')
-                ->get();
+        ->select('id', 'namapasien', 'nik', 'jeniskelamin', 'tanggalahir', 'alamat', 'beratbadan','tinggibadan', 'stunting', 'imunisasi', 'obat',
+                 DB::raw('TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()) as tahun'),
+                 DB::raw('FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)) as bulan'),
+                 DB::raw('CONCAT(TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()), " tahun ", FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)), " bulan") as umur'))
+        ->get();
 
         return view('stunting.index',compact('title','data'));
     }
@@ -126,7 +243,11 @@ class PasienController extends Controller
         $title = 'Pasien';
 
         $data = DB::table('pasien')
-                ->get();
+        ->select('id', 'namapasien', 'nik', 'jeniskelamin', 'tanggalahir', 'alamat', 'beratbadan','tinggibadan', 'stunting', 'imunisasi', 'obat',
+                 DB::raw('TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()) as tahun'),
+                 DB::raw('FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)) as bulan'),
+                 DB::raw('CONCAT(TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()), " tahun ", FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)), " bulan") as umur'))
+        ->get();
 
         return view('obat.index',compact('title','data'));
     }
@@ -143,7 +264,11 @@ class PasienController extends Controller
 
     public function tampilpasien(){
         $title = 'Pasien';
-        $pasien = DB::table('pasien')
+        $data = DB::table('pasien')
+        ->select('id', 'namapasien', 'nik', 'jeniskelamin', 'tanggalahir', 'alamat', 'beratbadan','tinggibadan', 'stunting', 'imunisasi', 'obat',
+                 DB::raw('TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()) as tahun'),
+                 DB::raw('FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)) as bulan'),
+                 DB::raw('CONCAT(TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()), " tahun ", FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)), " bulan") as umur'))
         ->get();
         return view('pasien.caripasien', compact('pasien','title'));
     }
@@ -165,6 +290,7 @@ class PasienController extends Controller
     public function hapuspenimbangan($id){
         $user = Pasien::find($id);
         $user->beratbadan = null;
+        $user->tinggibadan = null;
         $user->save();
 
         return redirect()->route('penimbangan')->with('success', 'Data Berhasil Dihapus');

@@ -24,8 +24,10 @@
                                         <th>NIK</th>
                                         <th>Nama Pasien</th>
                                         <th>Jenis Kelamin</th>
-                                        <th>Tanggal Lahir</th>
-                                        <th>Penimbangan</th>
+                                        <th>Umur</th>
+                                        <th>Berat badan</th>
+                                        <th>Tinggi badan</th>
+                                        <th>Imunisasi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -39,8 +41,9 @@
                                         <td>{{ $d->nik }}</td>
                                         <td>{{ $d->namapasien }}</td>
                                         <td>{{ $d->jeniskelamin }}</td>
-                                        <td>{{ $d->tanggalahir }}</td>
-                                        <td>{{ $d->beratbadan == null ? 'Belum Di Isi' : $d->beratbadan }}</td>
+                                        <td>{{ $d->umur }}</td>
+                                        <td>{{ $d->beratbadan == null ? 'Belum Di Isi' : $d->beratbadan . ' Kg' }}</td>
+                                        <td>{{ $d->tinggibadan == null ? 'Belum Di Isi' : $d->tinggibadan . ' CM' }}</td>
                                         <td>
                                             <form id="delete-form-{{ $d->id }}" action="{{ route('penimbangan.hapuspenimbangan', $d->id) }}" method="POST" style="display: inline;">
                                                 @csrf
@@ -70,9 +73,15 @@
                                                 <form action="{{ route('penimbangan.updatepenimbangan', $d->id) }}" method="POST">
                                                     @csrf
                                                     <div class="modal-body">
-                                                        <label for="NameLengkap">Penimbangan</label>
+                                                        <label for="NameLengkap">Berat Badan</label>
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" id="NameLengkap" name="beratbadan" value="{{ $d->beratbadan }}" placeholder="Kg" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <label for="NameLengkap">Tinggi Badan</label>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id="NameLengkap" name="tinggibadan" value="{{ $d->tinggibadan }}" placeholder="Cm" >
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -98,6 +107,12 @@
                                                         <label for="NameLengkap">Penimbangan</label>
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" id="NameLengkap" name="beratbadan" value="{{ $d->beratbadan }}" placeholder="Kg" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <label for="NameLengkap">Tinggi Badan</label>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id="NameLengkap" name="tinggibadan" value="{{ $d->tinggibadan }}" placeholder="Cm" >
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">

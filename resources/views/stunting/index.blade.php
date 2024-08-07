@@ -24,8 +24,9 @@
                                         <th>NIK</th>
                                         <th>Nama Pasien</th>
                                         <th>Jenis Kelamin</th>
-                                        <th>Tanggal Lahir</th>
-                                        <th>Penimbangan</th>
+                                        <th>Umur</th>
+                                        <th>Berat Badan</th>
+                                        <th>Tinggi Badan</th>
                                         <th>Imunisasi</th>
                                         <th>Stunting</th>
                                         <th>Aksi</th>
@@ -41,8 +42,9 @@
                                         <td>{{ $d->nik }}</td>
                                         <td>{{ $d->namapasien }}</td>
                                         <td>{{ $d->jeniskelamin }}</td>
-                                        <td>{{ $d->tanggalahir }}</td>
-                                        <td>{{ $d->beratbadan == null ? 'Belum Di Isi' : $d->beratbadan }}</td>
+                                        <td>{{ $d->umur }}</td>
+                                        <td>{{ $d->beratbadan == null ? 'Belum Di Isi' : $d->beratbadan . ' Kg' }}</td>
+                                        <td>{{ $d->tinggibadan == null ? 'Belum Di Isi' : $d->tinggibadan . ' CM' }}</td>
                                         <td>{{ $d->imunisasi == null ? 'Belum Di Isi' : $d->imunisasi }}</td>
                                         <td>{{ $d->stunting == null ? 'Tidak Stunting' : $d->stunting }}</td>
                                         <td>
