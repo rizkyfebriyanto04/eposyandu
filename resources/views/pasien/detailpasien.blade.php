@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Pasien</title>
+    <title>Detail User</title>
 
 
     <link rel="shortcut icon" href="{{'/dist/assets/compiled/svg/favicon.svg'}}" type="image/x-icon">
@@ -27,14 +27,14 @@
 
 <div class="container">
     <br>
-    <h2 align="center">Detail Pasien</h2>
+    <h2 align="center">Detail User</h2>
     <div class="card mt-5">
         <div class="card-header">
-            identitas Pasien
+            identitas User
         </div>
         <div class="card-body">
             @foreach($pasien as $item)
-                <p><strong>Nama Pasien:</strong> {{ $item->namapasien }}</p>
+                <p><strong>Nama User:</strong> {{ $item->namapasien }}</p>
                 <p><strong>NIK:</strong> {{ $item->nik }}</p>
                 <p><strong>Jenis Kelamin:</strong> {{ $item->jeniskelamin }}</p>
                 <p><strong>Tanggal Lahir:</strong> {{ $item->tanggalahir }}</p>

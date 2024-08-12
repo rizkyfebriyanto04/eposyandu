@@ -21,11 +21,11 @@
             class="sidebar-item  has-sub">
             <a href="#" class='sidebar-link'>
                 <i class="bi bi-stack"></i>
-                <span>Data Pasien</span>
+                <span>Data User</span>
             </a>
             <ul class="submenu ">
                 <li class="submenu-item  ">
-                    <a href="{{ route('pasien') }}" class="submenu-link">Pasien</a>
+                    <a href="{{ route('pasien') }}" class="submenu-link">User</a>
                 </li>
                 <li class="submenu-item  ">
                     <a href="{{ route('penimbangan') }}" class="submenu-link">Penimbangan</a>
@@ -47,7 +47,7 @@
             class="sidebar-item ">
             <a href="{{ route('tampilpasien') }}" class='sidebar-link'>
                 <i class="fas fa-search"></i>
-                <span>Cari Pasien</span>
+                <span>Cari User</span>
             </a>
         </li>
         @endif

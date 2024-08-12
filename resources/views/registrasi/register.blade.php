@@ -44,7 +44,10 @@
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $d->name }}</td>
                                         <td>{{ $d->email }}</td>
-                                        <td>{{ $d->role }}</td>
+                                        {{-- <td>{{ $d->role }}</td> --}}
+                                        <td>
+                                            {{ $d->role == 'pasien' ? 'user' : 'Admin' }}
+                                        </td>
                                         <td>
                                             <form id="delete-form-{{ $d->id }}" action="{{ route('registrasi.hapusregistrasi', $d->id) }}" method="POST" style="display: inline;">
                                                 @csrf

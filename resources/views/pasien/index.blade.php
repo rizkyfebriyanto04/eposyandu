@@ -11,7 +11,7 @@
                 <br><br>
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Data Pasien</h4>
+                        <h4 class="card-title">Data User</h4>
                         @if (session('success'))
                             <div class="alert alert-success" id="success-alert">
                                 {{ session('success') }}
@@ -25,7 +25,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>NIK</th>
-                                        <th>Nama Pasien</th>
+                                        <th>Nama User</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Tanggal Lahir</th>
                                         <th>Umur</th>
