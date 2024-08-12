@@ -7,7 +7,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Data Pasien</h4>
+                        <h4 class="card-title">Data User</h4>
                         @if (session('error'))
                             <div class="alert alert-danger" id="error-alert">
                                 {{ session('error') }}
@@ -18,8 +18,8 @@
                         <div class="form-group">
                             <form action="{{route('pasien.caripasien')}}" method="POST">
                                 @csrf <!-- Laravel Blade directive untuk menyertakan token CSRF -->
-                                <label for="caripasien" >Cari Pasien</label>
-                                <input type="text" class="form-control" name="caripasien" id="caripasien" placeholder="Masukkan nama pasien">
+                                <label for="caripasien" >Cari User</label>
+                                <input type="text" class="form-control" name="caripasien" id="caripasien" placeholder="Masukkan nama ">
                                 <button type="submit" class="btn btn-primary mt-2">Cari</button>
                             </form>
                         </div>

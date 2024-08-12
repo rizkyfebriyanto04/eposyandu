@@ -264,7 +264,7 @@ class PasienController extends Controller
 
     public function tampilpasien(){
         $title = 'Pasien';
-        $data = DB::table('pasien')
+        $pasien = DB::table('pasien')
         ->select('id', 'namapasien', 'nik', 'jeniskelamin', 'tanggalahir', 'alamat', 'beratbadan','tinggibadan', 'stunting', 'imunisasi', 'obat',
                  DB::raw('TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()) as tahun'),
                  DB::raw('FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)) as bulan'),
