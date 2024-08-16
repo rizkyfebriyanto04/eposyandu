@@ -26,6 +26,22 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #pasienDiv {
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #pasienDiv.show {
+            display: block;
+            opacity: 1;
+        }
+
+        #pasienDiv.hide {
+            opacity: 0;
+        }
+
+    </style>
 </head>
 
 <body>

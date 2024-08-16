@@ -46,7 +46,14 @@
                                         <td>{{ $d->email }}</td>
                                         {{-- <td>{{ $d->role }}</td> --}}
                                         <td>
-                                            {{ $d->role == 'pasien' ? 'user' : 'Admin' }}
+                                            @if($d->role == 'pasien')
+                                                User
+                                            @elseif($d->role == 'petugasppk')
+                                                Petugas PPK
+                                            @else
+                                                Admin
+                                            @endif
+
                                         </td>
                                         <td>
                                             <form id="delete-form-{{ $d->id }}" action="{{ route('registrasi.hapusregistrasi', $d->id) }}" method="POST" style="display: inline;">
@@ -98,17 +105,27 @@
                         <div class="form-group">
                             <input type="password" id="password-horizontal" class="form-control" name="password" placeholder="Password">
                         </div>
+                        <label for="role">Role</label>
+                        <fieldset class="form-group">
+                            <select class="form-select" id="roleSelect" name="role">
+                                <option selected>-- Pilih --</option>
+                                <option value="pasien">Pasien</option>
+                                <option value="petugasppk">Petugas PPK</option>
+                            </select>
+                        </fieldset>
 
-                        <div>
-                            <label for="objectsiswafk">Pasien</label>
+                        <div id="pasienDiv">
+                            <label for="objectpasienfk">Pasien</label>
                             <fieldset class="form-group">
-                                <select class="choices form-select"  name="objectpasienfk">
+                                <select class="choices form-select" name="objectpasienfk">
                                     @foreach ($pasien as $s)
                                         <option value="{{ $s->id }}">{{ $s->namapasien }}</option>
                                     @endforeach
                                 </select>
                             </fieldset>
                         </div>
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light-secondary"
@@ -182,5 +199,24 @@
             alertBox.style.display = 'none';
         }, 3000);
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const roleSelect = document.getElementById('roleSelect');
+            const pasienDiv = document.getElementById('pasienDiv');
+
+            pasienDiv.classList.add('hide');
+
+            roleSelect.addEventListener('change', function () {
+                if (this.value === 'pasien') {
+                    pasienDiv.classList.remove('hide');
+                    pasienDiv.classList.add('show');
+                } else {
+                    pasienDiv.classList.remove('show');
+                    pasienDiv.classList.add('hide');
+                }
+            });
+        });
+    </script>
+
 @endsection
 

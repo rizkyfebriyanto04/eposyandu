@@ -64,7 +64,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="editModalLabel{{ $d->id }}">Edit Data Pasien</h5>
+                                                    <h5 class="modal-title" id="editModalLabel{{ $d->id }}">Edit Data user</h5>
                                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -72,7 +72,7 @@
                                                 <form action="{{ route('pasien.updatepasien', $d->id) }}" method="POST">
                                                     @csrf
                                                     <div class="modal-body">
-                                                        <label for="NameLengkap">Nama Pasien</label>
+                                                        <label for="NameLengkap">Nama User</label>
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" id="NameLengkap" name="namapasien" value="{{ $d->namapasien }}" placeholder="Nama Lengkap" required>
                                                         </div>

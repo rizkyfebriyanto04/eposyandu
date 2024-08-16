@@ -27,11 +27,12 @@ class UserController extends Controller
     {
 
         $pasien = $request->objectpasienfk === '--Pilih--' ? null : $request->objectpasienfk;
+        $role = $request->role === 'petugasppk' ? 'petugasppk' : 'pasien';
         // return $pasien;
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
-            'role' => 'pasien',
+            'role' => $role,
             'password' => Hash::make($request->password),
             'objectpasienfk' => $pasien,
         ]);
