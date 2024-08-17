@@ -51,9 +51,11 @@
                                             <form id="delete-form-{{ $d->id }}" action="{{ route('stunting.hapusstunting', $d->id) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('POST')
+                                            @if(auth()->check() && (auth()->user()->role === 'petugasppk'))
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $d->id }}">
                                                 Input
                                             </button>
+                                            @endif
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal2{{ $d->id }}">
                                                 Edit
                                             </button>

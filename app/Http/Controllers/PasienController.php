@@ -25,6 +25,9 @@ class PasienController extends Controller
 
     public function pasien_aksi(Request $request)
     {
+        if (!str_contains(strtolower($request->alamat), 'margahayu')) {
+            return redirect()->back()->withInput()->with('error', 'Bukan Warga Margahayu');
+        }
         $pasien = new Pasien([
             'namapasien' => $request->namapasien,
             'nik' => $request->nik,

@@ -46,8 +46,8 @@
                                         <td>{{ $d->email }}</td>
                                         {{-- <td>{{ $d->role }}</td> --}}
                                         <td>
-                                            @if($d->role == 'pasien')
-                                                User
+                                            @if($d->role == 'orangtua')
+                                                Orangtua
                                             @elseif($d->role == 'petugasppk')
                                                 Petugas PPK
                                             @else
@@ -109,13 +109,13 @@
                         <fieldset class="form-group">
                             <select class="form-select" id="roleSelect" name="role">
                                 <option selected>-- Pilih --</option>
-                                <option value="pasien">Pasien</option>
+                                <option value="orangtua">OrangTua</option>
                                 <option value="petugasppk">Petugas PPK</option>
                             </select>
                         </fieldset>
 
                         <div id="pasienDiv">
-                            <label for="objectpasienfk">Pasien</label>
+                            <label for="objectpasienfk">User</label>
                             <fieldset class="form-group">
                                 <select class="choices form-select" name="objectpasienfk">
                                     @foreach ($pasien as $s)
@@ -207,7 +207,7 @@
             pasienDiv.classList.add('hide');
 
             roleSelect.addEventListener('change', function () {
-                if (this.value === 'pasien') {
+                if (this.value === 'orangtua') {
                     pasienDiv.classList.remove('hide');
                     pasienDiv.classList.add('show');
                 } else {

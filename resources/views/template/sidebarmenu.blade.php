@@ -8,7 +8,6 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        @if(auth()->check() && auth()->user()->role === 'admin' || 'petugaspkk')
 
         @if(auth()->check() && (auth()->user()->role === 'admin'))
         <li
@@ -30,6 +29,7 @@
                 <li class="submenu-item  ">
                     <a href="{{ route('pasien') }}" class="submenu-link">User</a>
                 </li>
+                @if(auth()->check() && (auth()->user()->role === 'petugasppk' || 'orangtua'))
                 <li class="submenu-item  ">
                     <a href="{{ route('penimbangan') }}" class="submenu-link">Penimbangan</a>
                 </li>
@@ -42,10 +42,9 @@
                 <li class="submenu-item  ">
                     <a href="{{ route('obat') }}" class="submenu-link">Vitamin / Obat</a>
                 </li>
+                @endif
             </ul>
         </li>
-        @endif
-        @if(auth()->check() && (auth()->user()->role === 'pasien' || auth()->user()->role === 'admin' || auth()->user()->role === 'petugasppk'))
         <li
             class="sidebar-item ">
             <a href="{{ route('tampilpasien') }}" class='sidebar-link'>
@@ -53,7 +52,6 @@
                 <span>Cari User</span>
             </a>
         </li>
-        @endif
     </ul>
     <br>
     <ul class="menu">

@@ -17,6 +17,12 @@
                                 {{ session('success') }}
                             </div>
                         @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger" id="success-alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
                     </div>
                     <div class="card-content">
                         <div class="table-responsive">
@@ -29,6 +35,7 @@
                                         <th>Jenis Kelamin</th>
                                         <th>Tanggal Lahir</th>
                                         <th>Umur</th>
+                                        <th>Alamat</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,6 +50,7 @@
                                         <td>{{ $d->jeniskelamin }}</td>
                                         <td>{{ $d->tanggalahir }}</td>
                                         <td>{{ $d->umur }}</td>
+                                        <td>{{ $d->alamat }}</td>
                                         <td>
                                             <form id="delete-form-{{ $d->id }}" action="{{ route('pasien.hapuspasien', $d->id) }}" method="POST" style="display: inline;">
                                                 @csrf
