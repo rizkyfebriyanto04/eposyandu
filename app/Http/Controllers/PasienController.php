@@ -323,5 +323,18 @@ class PasienController extends Controller
         return redirect()->route('obat')->with('success', 'Data Berhasil Dihapus');
     }
 
+    public function hasilpdf($id){
+        $title = 'Pasien';
+        $pasien = DB::table('pasien')
+        ->select('id', 'namapasien', 'nik', 'jeniskelamin', 'tanggalahir', 'alamat', 'beratbadan','tinggibadan', 'stunting', 'imunisasi', 'obat',
+                 DB::raw('TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()) as tahun'),
+                 DB::raw('FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)) as bulan'),
+                 DB::raw('CONCAT(TIMESTAMPDIFF(YEAR, tanggalahir, CURDATE()), " tahun ", FLOOR(MOD(PERIOD_DIFF(DATE_FORMAT(CURDATE(), "%Y%m"), DATE_FORMAT(tanggalahir, "%Y%m")), 12)), " bulan") as umur'))
+        ->where('id', $id)
+        ->first();
+        // return $pasien;
+        return view('pasien.hasilpdf', compact('pasien','title'));
+    }
+
 
 }

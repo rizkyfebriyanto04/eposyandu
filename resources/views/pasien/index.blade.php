@@ -36,6 +36,8 @@
                                         <th>Tanggal Lahir</th>
                                         <th>Umur</th>
                                         <th>Alamat</th>
+                                        <th>Aksi</th>
+                                        <th>Cetak</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,7 +66,13 @@
                                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $d->id }}">
                                                     Edit
                                                 </button>
+                                                {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $d->id }}">
+                                                    Cetak
+                                                </button> --}}
                                             </form>
+                                        </td>
+                                        <td>
+                                            <a href="/hasilpasien/{{ $d->id }}" class="btn btn-primary" target="_blank"><i class="fas fa-file-pdf"></i> Cetak</a>
                                         </td>
                                     </tr>
 

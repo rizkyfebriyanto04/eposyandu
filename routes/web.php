@@ -60,3 +60,4 @@ Route::post('delete-obat/{id}', [PasienController::class, 'hapusobat'])->name('o
 Route::get('tampilpasien', [PasienController::class, 'tampilpasien'])->name('tampilpasien');
 Route::post('cari/pasien', [PasienController::class, 'caripasien'])->name('pasien.caripasien');
 
+Route::get('hasilpasien/{id}', [PasienController::class, 'hasilpdf'])->name('hasil');
